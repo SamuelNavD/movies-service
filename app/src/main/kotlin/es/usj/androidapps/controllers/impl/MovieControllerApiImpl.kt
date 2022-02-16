@@ -4,7 +4,6 @@ import es.usj.androidapps.controllers.MovieControllerApi
 import es.usj.androidapps.model.dto.MovieDTO
 import es.usj.androidapps.services.MovieServiceApi
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import java.util.*

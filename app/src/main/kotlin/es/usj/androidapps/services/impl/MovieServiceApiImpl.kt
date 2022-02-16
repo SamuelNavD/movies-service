@@ -15,7 +15,7 @@ class MovieServiceApiImpl : MovieServiceApi {
     lateinit var movieRepository: MovieRepository
 
     override fun list(limit: Int?, offset: Long?): List<MovieDTO> {
-        if(limit != null && offset != null) {
+        if (limit != null && offset != null) {
             val pageable = OffsetBasedPageRequest(
                 offset,
                 limit
@@ -31,7 +31,7 @@ class MovieServiceApiImpl : MovieServiceApi {
 
     override fun delete(id: UUID): MovieDTO {
         val movie = find(id)
-        if(movie != null) {
+        if (movie != null) {
             movieRepository.deleteById(id)
             return movie
         } else {

@@ -1,9 +1,10 @@
 package es.usj.androidapps.services
 
-import es.usj.androidapps.model.User
 import es.usj.androidapps.model.dto.LoginRequestDTO
 import es.usj.androidapps.model.dto.LoginResponseDTO
+import org.springframework.stereotype.Service
 
+@Service
 interface UserServiceApi {
-    fun login(request: LoginRequestDTO) : LoginResponseDTO
+    fun login(request: LoginRequestDTO): LoginResponseDTO
 }

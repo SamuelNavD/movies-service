@@ -48,7 +48,7 @@ class JwtAuthTokenFilter : OncePerRequestFilter() {
     }
 
     fun whitelistedPaths(): List<String> {
-        return listOf("/health-check","/login")
+        return listOf("/health-check", "/login")
     }
 
 

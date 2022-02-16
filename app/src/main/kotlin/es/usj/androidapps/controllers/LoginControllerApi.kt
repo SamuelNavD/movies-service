@@ -1,6 +1,5 @@
 package es.usj.androidapps.controllers
 
-import es.usj.androidapps.model.User
 import es.usj.androidapps.model.dto.ActorDTO
 import es.usj.androidapps.model.dto.LoginRequestDTO
 import es.usj.androidapps.model.dto.LoginResponseDTO
@@ -10,8 +9,9 @@ import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
-import java.util.*
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestMethod
 import javax.validation.Valid
 
 @Api(value = "Existing Building Book Service", description = "Existing Building Book API", basePath = "/login")

@@ -2,7 +2,7 @@ package es.usj.androidapps.model
 
 import org.hibernate.annotations.LazyCollection
 import org.hibernate.annotations.LazyCollectionOption
-import java.util.UUID
+import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -32,7 +32,7 @@ class Movie(
         joinColumns = [JoinColumn(name = "actor_id")],
         inverseJoinColumns = [JoinColumn(name = "movie_id")]
     )
-    val actors: MutableList<Actor>,
+    val actors: MutableList<Actor> = mutableListOf(),
     @ManyToMany(cascade = [CascadeType.ALL])
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
@@ -40,7 +40,7 @@ class Movie(
         joinColumns = [JoinColumn(name = "genre_id")],
         inverseJoinColumns = [JoinColumn(name = "movie_id")]
     )
-    val genres: MutableList<Genre>,
+    val genres: MutableList<Genre> = mutableListOf()
 ) {
     fun addAllGenres(genres: List<Genre>) {
         genres.forEach { addGenre(it) }

@@ -9,6 +9,6 @@ class Genre(
     val id: UUID = UUID.randomUUID(),
     @Column(unique = true)
     val name: String,
-    @JoinColumn(nullable = true)
+    @ManyToMany(mappedBy = "genres")
     val movies: MutableList<Movie> = mutableListOf()
 )

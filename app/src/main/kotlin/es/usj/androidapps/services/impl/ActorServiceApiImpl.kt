@@ -14,7 +14,7 @@ class ActorServiceApiImpl : ActorServiceApi {
     lateinit var actorRepository: ActorRepository
 
     override fun list(limit: Int?, offset: Long?): List<ActorDTO> {
-        if(limit != null && offset != null) {
+        if (limit != null && offset != null) {
             val pageable = OffsetBasedPageRequest(
                 offset,
                 limit
@@ -30,7 +30,7 @@ class ActorServiceApiImpl : ActorServiceApi {
 
     override fun delete(id: UUID): ActorDTO {
         val actor = find(id)
-        if(actor != null) {
+        if (actor != null) {
             actorRepository.deleteById(id)
             return actor
         } else {

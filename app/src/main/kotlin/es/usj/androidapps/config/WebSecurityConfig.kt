@@ -4,6 +4,7 @@ import es.usj.androidapps.security.JwtAuthTokenFilter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
@@ -26,6 +27,7 @@ import java.security.SecureRandom
 
 @Configuration
 @EnableAutoConfiguration
+@ComponentScan("es.usj.androidapps")
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 internal class WebSecurityConfig : WebSecurityConfigurerAdapter(), WebMvcConfigurer {

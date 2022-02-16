@@ -1,14 +1,10 @@
 package es.usj.androidapps.controllers.impl
 
-import es.usj.androidapps.controllers.GenreControllerApi
 import es.usj.androidapps.controllers.LoginControllerApi
-import es.usj.androidapps.model.dto.GenreDTO
 import es.usj.androidapps.model.dto.LoginRequestDTO
 import es.usj.androidapps.model.dto.LoginResponseDTO
 import es.usj.androidapps.security.JwtProvider
 import es.usj.androidapps.security.JwtUserDetailsService
-import es.usj.androidapps.services.GenreServiceApi
-import es.usj.androidapps.services.UserServiceApi
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
@@ -16,7 +12,6 @@ import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.DisabledException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.stereotype.Controller
-import java.util.*
 
 @Controller
 class LoginControllerApiImpl : LoginControllerApi {

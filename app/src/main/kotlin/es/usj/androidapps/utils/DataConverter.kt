@@ -9,7 +9,7 @@ import es.usj.androidapps.model.dto.MovieDTO
 
 object DataConverter {
 
-    fun actorToDTO(actor: Actor) : ActorDTO {
+    fun actorToDTO(actor: Actor): ActorDTO {
         return ActorDTO(
             actor.id,
             actor.name
@@ -24,7 +24,7 @@ object DataConverter {
         )
     }
 
-    fun genreToDTO(genre: Genre) : GenreDTO {
+    fun genreToDTO(genre: Genre): GenreDTO {
         return GenreDTO(
             genre.id,
             genre.name
@@ -39,7 +39,7 @@ object DataConverter {
         )
     }
 
-    fun movieToDTO(movie: Movie) : MovieDTO {
+    fun movieToDTO(movie: Movie): MovieDTO {
         return MovieDTO(
             movie.id,
             movie.title,

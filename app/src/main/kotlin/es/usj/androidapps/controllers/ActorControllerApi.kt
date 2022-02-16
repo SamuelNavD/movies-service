@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 import javax.validation.Valid
 
-@Api(value = "Existing Building Book Service", description = "Existing Building Book API", basePath = "/actors")
+@Api(value = "Existing Building Book Service", description = "Existing Building Book API")
+@RequestMapping("actors")
 interface ActorControllerApi {
 
     @ApiOperation(
@@ -103,6 +104,7 @@ interface ActorControllerApi {
         ]
     )
     @RequestMapping(
+        path = ["/{id}"],
         method = [RequestMethod.GET],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
@@ -131,5 +133,8 @@ interface ActorControllerApi {
         method = [RequestMethod.GET],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun getActors(@RequestParam("limit") limit: Int? = null, @RequestParam("offset") offset: Long? = null): ResponseEntity<List<ActorDTO>>
+    fun getActors(
+        @RequestParam("limit") limit: Int? = null,
+        @RequestParam("offset") offset: Long? = null
+    ): ResponseEntity<List<ActorDTO>>
 }

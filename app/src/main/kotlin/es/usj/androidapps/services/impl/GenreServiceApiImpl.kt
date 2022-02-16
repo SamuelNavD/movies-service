@@ -15,7 +15,7 @@ class GenreServiceApiImpl : GenreServiceApi {
     lateinit var genreRepository: GenreRepository
 
     override fun list(limit: Int?, offset: Long?): List<GenreDTO> {
-        if(limit != null && offset != null) {
+        if (limit != null && offset != null) {
             val pageable = OffsetBasedPageRequest(
                 offset,
                 limit
@@ -31,7 +31,7 @@ class GenreServiceApiImpl : GenreServiceApi {
 
     override fun delete(id: UUID): GenreDTO {
         val genre = find(id)
-        if(genre != null) {
+        if (genre != null) {
             genreRepository.deleteById(id)
             return genre
         } else {
