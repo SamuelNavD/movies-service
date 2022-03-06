@@ -7,7 +7,6 @@ import es.usj.androidapps.utils.DataConverter
 import es.usj.androidapps.utils.OffsetBasedPageRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 class GenreServiceApiImpl : GenreServiceApi {
@@ -25,11 +24,11 @@ class GenreServiceApiImpl : GenreServiceApi {
         return genreRepository.findAll().map { DataConverter.genreToDTO(it) }
     }
 
-    override fun find(id: UUID): GenreDTO? {
+    override fun find(id: Long): GenreDTO? {
         return DataConverter.genreToDTO(genreRepository.findById(id).get())
     }
 
-    override fun delete(id: UUID): GenreDTO {
+    override fun delete(id: Long): GenreDTO {
         val genre = find(id)
         if (genre != null) {
             genreRepository.deleteById(id)
@@ -42,5 +41,11 @@ class GenreServiceApiImpl : GenreServiceApi {
     override fun save(element: GenreDTO): GenreDTO {
         val item = DataConverter.genreFromDTO(element)
         return DataConverter.genreToDTO(genreRepository.save(item))
+    }
+
+    override fun edit(element: GenreDTO): Int {
+        val item = DataConverter.genreFromDTO(element)
+        genreRepository.save(item)
+        return 1
     }
 }

@@ -80,7 +80,7 @@ internal class WebSecurityConfig : WebSecurityConfigurerAdapter(), WebMvcConfigu
         httpSecurity.cors().and().csrf().disable() // dont authenticate this particular request
             .authorizeRequests()
             .antMatchers(
-                "/",
+                "/**",
                 "/swagger-ui.html",
                 "/swagger-ui/**",
                 "/swagger-resources/**",

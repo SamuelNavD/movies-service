@@ -56,7 +56,7 @@ class SwaggerDocumentationConfig {
     }
 
     private fun apiKey(): ApiKey {
-        return ApiKey("JWT", "Authorization", "header")
+        return ApiKey("Authorization", "Authorization", "header")
     }
 
     private fun securityContext(): SecurityContext {
@@ -72,6 +72,6 @@ class SwaggerDocumentationConfig {
     }
 
     fun defaultAuth(): List<SecurityReference> {
-        return listOf(SecurityReference("JWT", authorizationScopes()))
+        return listOf(SecurityReference("Authorization", authorizationScopes()))
     }
 }

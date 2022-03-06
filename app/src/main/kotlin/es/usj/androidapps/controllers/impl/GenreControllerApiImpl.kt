@@ -6,7 +6,6 @@ import es.usj.androidapps.services.GenreServiceApi
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
-import java.util.*
 
 @Controller
 class GenreControllerApiImpl : GenreControllerApi {
@@ -30,7 +29,7 @@ class GenreControllerApiImpl : GenreControllerApi {
         }
     }
 
-    override fun deleteGenre(id: UUID): ResponseEntity<GenreDTO> {
+    override fun deleteGenre(id: Long): ResponseEntity<GenreDTO> {
         return try {
             ResponseEntity.ok().body(genreService.delete(id))
         } catch (e: Exception) {
@@ -38,7 +37,7 @@ class GenreControllerApiImpl : GenreControllerApi {
         }
     }
 
-    override fun getGenreById(id: UUID): ResponseEntity<GenreDTO> {
+    override fun getGenreById(id: Long): ResponseEntity<GenreDTO> {
         return try {
             ResponseEntity.ok().body(genreService.find(id))
         } catch (e: Exception) {

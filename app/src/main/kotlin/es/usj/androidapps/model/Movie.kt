@@ -2,20 +2,21 @@ package es.usj.androidapps.model
 
 import org.hibernate.annotations.LazyCollection
 import org.hibernate.annotations.LazyCollectionOption
-import java.util.*
 import javax.persistence.*
 
 @Entity
+@Table(name = "movies")
 class Movie(
     @Id
-    val id: UUID = UUID.randomUUID(),
-    @Column(unique = true)
+    @GeneratedValue
+    val id: Long,
+    @Column(length = 250)
     val title: String,
     @Column(columnDefinition = "TEXT")
     val description: String,
     @Column
     val director: String,
-    @Column
+    @Column(name = "release_year")
     val year: Int,
     @Column
     val runtime: Int,
@@ -28,20 +29,22 @@ class Movie(
     @ManyToMany(cascade = [CascadeType.ALL])
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
-        name = "actor_movie",
-        joinColumns = [JoinColumn(name = "actor_id")],
-        inverseJoinColumns = [JoinColumn(name = "movie_id")]
+        name = "actors_to_movies",
+        joinColumns = [JoinColumn(name = "id_actor")],
+        inverseJoinColumns = [JoinColumn(name = "id_movie")]
     )
     val actors: MutableList<Actor> = mutableListOf(),
     @ManyToMany(cascade = [CascadeType.ALL])
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
-        name = "genre_movie",
-        joinColumns = [JoinColumn(name = "genre_id")],
-        inverseJoinColumns = [JoinColumn(name = "movie_id")]
+        name = "genres_to_movies",
+        joinColumns = [JoinColumn(name = "id_genre")],
+        inverseJoinColumns = [JoinColumn(name = "id_movie")]
     )
     val genres: MutableList<Genre> = mutableListOf()
 ) {
+    constructor() : this(0, "", "", "", 0, 0, 0.0, 0, 0.0)
+
     fun addAllGenres(genres: List<Genre>) {
         genres.forEach { addGenre(it) }
     }

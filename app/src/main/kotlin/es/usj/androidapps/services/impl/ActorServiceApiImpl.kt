@@ -6,8 +6,9 @@ import es.usj.androidapps.services.ActorServiceApi
 import es.usj.androidapps.utils.DataConverter
 import es.usj.androidapps.utils.OffsetBasedPageRequest
 import org.springframework.beans.factory.annotation.Autowired
-import java.util.*
+import org.springframework.stereotype.Service
 
+@Service
 class ActorServiceApiImpl : ActorServiceApi {
 
     @Autowired
@@ -24,11 +25,11 @@ class ActorServiceApiImpl : ActorServiceApi {
         return actorRepository.findAll().map { DataConverter.actorToDTO(it) }
     }
 
-    override fun find(id: UUID): ActorDTO? {
+    override fun find(id: Long): ActorDTO? {
         return DataConverter.actorToDTO(actorRepository.findById(id).get())
     }
 
-    override fun delete(id: UUID): ActorDTO {
+    override fun delete(id: Long): ActorDTO {
         val actor = find(id)
         if (actor != null) {
             actorRepository.deleteById(id)
@@ -41,5 +42,11 @@ class ActorServiceApiImpl : ActorServiceApi {
     override fun save(element: ActorDTO): ActorDTO {
         val item = DataConverter.actorFromDTO(element)
         return DataConverter.actorToDTO(actorRepository.save(item))
+    }
+
+    override fun edit(element: ActorDTO): Int {
+        val item = DataConverter.actorFromDTO(element)
+        actorRepository.save(item)
+        return 1
     }
 }

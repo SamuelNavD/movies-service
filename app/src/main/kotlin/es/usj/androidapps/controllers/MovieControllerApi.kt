@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiResponses
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.util.*
 import javax.validation.Valid
 
 @Api(value = "Existing Building Book Service", description = "Existing Building Book API")
@@ -84,7 +83,7 @@ interface MovieControllerApi {
         method = [RequestMethod.DELETE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun deleteMovie(@PathVariable id: UUID): ResponseEntity<MovieDTO>
+    fun deleteMovie(@PathVariable id: Long): ResponseEntity<MovieDTO>
 
     @ApiOperation(
         value = "Get movie by id.",
@@ -108,7 +107,7 @@ interface MovieControllerApi {
         method = [RequestMethod.GET],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun getMovieById(@PathVariable id: UUID): ResponseEntity<MovieDTO>
+    fun getMovieById(@PathVariable id: Long): ResponseEntity<MovieDTO>
 
 
     @ApiOperation(
@@ -134,7 +133,7 @@ interface MovieControllerApi {
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun getMovies(
-        @RequestParam("limit") limit: Int? = null,
-        @RequestParam("offset") offset: Long? = null
+        @RequestParam("limit", required = false) limit: Int? = 1500,
+        @RequestParam("offset", required = false) offset: Long? = 0
     ): ResponseEntity<List<MovieDTO>>
 }

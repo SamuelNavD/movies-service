@@ -1,14 +1,15 @@
 package es.usj.androidapps.model
 
-import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-class User(
+class AppUser(
     @Id
-    val id: UUID = UUID.randomUUID(),
+    @GeneratedValue
+    val id: Long,
     @Column(unique = true)
     val username: String,
     @Column

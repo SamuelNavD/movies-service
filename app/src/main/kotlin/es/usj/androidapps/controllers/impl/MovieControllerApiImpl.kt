@@ -6,7 +6,6 @@ import es.usj.androidapps.services.MovieServiceApi
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
-import java.util.*
 
 @Controller
 class MovieControllerApiImpl : MovieControllerApi {
@@ -30,7 +29,7 @@ class MovieControllerApiImpl : MovieControllerApi {
         }
     }
 
-    override fun deleteMovie(id: UUID): ResponseEntity<MovieDTO> {
+    override fun deleteMovie(id: Long): ResponseEntity<MovieDTO> {
         return try {
             ResponseEntity.ok().body(movieService.delete(id))
         } catch (e: Exception) {
@@ -38,7 +37,7 @@ class MovieControllerApiImpl : MovieControllerApi {
         }
     }
 
-    override fun getMovieById(id: UUID): ResponseEntity<MovieDTO> {
+    override fun getMovieById(id: Long): ResponseEntity<MovieDTO> {
         return try {
             ResponseEntity.ok().body(movieService.find(id))
         } catch (e: Exception) {

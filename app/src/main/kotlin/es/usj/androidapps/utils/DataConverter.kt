@@ -50,13 +50,13 @@ object DataConverter {
             movie.rating,
             movie.votes,
             movie.revenue,
-            movie.actors.map { actorToDTO(it) },
-            movie.genres.map { genreToDTO(it) }
+            movie.actors.map { it.id },
+            movie.genres.map { it.id }
         )
     }
 
     fun movieFromDTO(movieDTO: MovieDTO): Movie {
-        val movie = Movie(
+        return Movie(
             movieDTO.id,
             movieDTO.title,
             movieDTO.description,
@@ -69,8 +69,5 @@ object DataConverter {
             mutableListOf(),
             mutableListOf()
         )
-        movie.addAllActors(movieDTO.actors.map { actorFromDTO(it) })
-        movie.addAllGenres(movieDTO.genres.map { genreFromDTO(it) })
-        return movie
     }
 }

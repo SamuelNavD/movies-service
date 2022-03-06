@@ -1,9 +1,9 @@
 package es.usj.androidapps.config
 
 import es.usj.androidapps.model.Actor
+import es.usj.androidapps.model.AppUser
 import es.usj.androidapps.model.Genre
 import es.usj.androidapps.model.Movie
-import es.usj.androidapps.model.User
 import org.h2.tools.Server
 import org.hibernate.boot.MetadataSources
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder
@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
 import org.springframework.transaction.annotation.EnableTransactionManagement
@@ -31,7 +30,6 @@ import javax.sql.DataSource
 @EnableJpaRepositories(basePackages = ["es.usj.androidapps"])
 @EnableTransactionManagement
 class H2SQLConfiguration {
-
 
     @Value("\${spring.datasource.config.base.package}")
     protected val basePackage: String? = null
@@ -49,8 +47,6 @@ class H2SQLConfiguration {
     fun dataSource(): DataSource {
         val builder = EmbeddedDatabaseBuilder()
         return builder.setType(EmbeddedDatabaseType.H2)
-            //.addScript("db/sql/create-db.sql")
-            //.addScript("db/sql/insert-data.sql")
             .build()
     }
 
@@ -87,7 +83,7 @@ class H2SQLConfiguration {
         settings[Environment.PASS] = password
         val serviceRegistry = StandardServiceRegistryBuilder().applySettings(settings).build()
         val metadataSources = MetadataSources(serviceRegistry)
-        metadataSources.addAnnotatedClass(User::class.java)
+        metadataSources.addAnnotatedClass(AppUser::class.java)
         metadataSources.addAnnotatedClass(Actor::class.java)
         metadataSources.addAnnotatedClass(Movie::class.java)
         metadataSources.addAnnotatedClass(Genre::class.java)

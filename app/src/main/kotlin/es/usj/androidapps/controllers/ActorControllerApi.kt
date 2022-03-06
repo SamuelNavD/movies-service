@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiResponses
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.util.*
 import javax.validation.Valid
 
 @Api(value = "Existing Building Book Service", description = "Existing Building Book API")
@@ -37,7 +36,7 @@ interface ActorControllerApi {
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun createActor(@RequestBody @Valid body: ActorDTO): ResponseEntity<ActorDTO>
+    fun createActor(@RequestBody @Valid actorDTO: ActorDTO): ResponseEntity<ActorDTO>
 
     @ApiOperation(
         value = "Updates a new actor.",
@@ -61,7 +60,7 @@ interface ActorControllerApi {
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.TEXT_PLAIN_VALUE]
     )
-    fun updateActor(@RequestBody @Valid body: ActorDTO): ResponseEntity<Int>
+    fun updateActor(@RequestBody @Valid actorDTO: ActorDTO): ResponseEntity<Int>
 
     @ApiOperation(
         value = "Deletes a new actor.",
@@ -84,7 +83,7 @@ interface ActorControllerApi {
         method = [RequestMethod.DELETE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun deleteActor(@PathVariable id: UUID): ResponseEntity<ActorDTO>
+    fun deleteActor(@PathVariable id: Long): ResponseEntity<ActorDTO>
 
     @ApiOperation(
         value = "Get actor by id.",
@@ -108,7 +107,7 @@ interface ActorControllerApi {
         method = [RequestMethod.GET],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun getActorById(@PathVariable id: UUID): ResponseEntity<ActorDTO>
+    fun getActorById(@PathVariable id: Long): ResponseEntity<ActorDTO>
 
 
     @ApiOperation(
@@ -134,7 +133,7 @@ interface ActorControllerApi {
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun getActors(
-        @RequestParam("limit") limit: Int? = null,
-        @RequestParam("offset") offset: Long? = null
+        @RequestParam("limit", required = false) limit: Int? = 1000,
+        @RequestParam("offset", required = false) offset: Long? = 0
     ): ResponseEntity<List<ActorDTO>>
 }

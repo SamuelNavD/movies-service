@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiResponses
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.util.*
 import javax.validation.Valid
 
 @Api(value = "Existing Building Book Service", description = "Existing Building Book API")
@@ -84,7 +83,7 @@ interface GenreControllerApi {
         method = [RequestMethod.DELETE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun deleteGenre(@PathVariable id: UUID): ResponseEntity<GenreDTO>
+    fun deleteGenre(@PathVariable id: Long): ResponseEntity<GenreDTO>
 
     @ApiOperation(
         value = "Get genre by id.",
@@ -108,7 +107,7 @@ interface GenreControllerApi {
         method = [RequestMethod.GET],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun getGenreById(@PathVariable id: UUID): ResponseEntity<GenreDTO>
+    fun getGenreById(@PathVariable id: Long): ResponseEntity<GenreDTO>
 
 
     @ApiOperation(
@@ -134,7 +133,7 @@ interface GenreControllerApi {
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun getGenres(
-        @RequestParam("limit") limit: Int? = null,
-        @RequestParam("offset") offset: Long? = null
+        @RequestParam("limit", required = false) limit: Int? = 1000,
+        @RequestParam("offset", required = false) offset: Long? = 0
     ): ResponseEntity<List<GenreDTO>>
 }

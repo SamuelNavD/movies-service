@@ -1,18 +1,17 @@
 package es.usj.androidapps.model
 
-import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToMany
+import javax.persistence.*
 
 @Entity
+@Table(name = "actors")
 class Actor(
     @Id
-    val id: UUID = UUID.randomUUID(),
+    @GeneratedValue
+    val id: Long,
     @Column(unique = true)
     val name: String,
     @ManyToMany(mappedBy = "actors")
     val movies: MutableList<Movie> = mutableListOf()
-)
+) {
+    constructor() : this(0, "")
+}

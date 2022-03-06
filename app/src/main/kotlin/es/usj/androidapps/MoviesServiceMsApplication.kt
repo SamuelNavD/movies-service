@@ -6,7 +6,7 @@ import org.springframework.boot.runApplication
 
 @EntityScan(basePackages = ["es.usj.androidapps"])
 @SpringBootApplication
-class MoviesServiceMsApplication {}
+class MoviesServiceMsApplication
 
 fun main(args: Array<String>) {
     runApplication<MoviesServiceMsApplication>(*args)
