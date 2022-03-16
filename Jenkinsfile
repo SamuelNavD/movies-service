@@ -27,11 +27,11 @@ def setup(environment) {
 pipeline {
 
     agent any
-    options([[$class: 'JiraProjectProperty'], parameters([string(defaultValue: 'dev', name: 'destination_environment')])])
+    parameters([string(defaultValue: 'dev', name: 'destination_environment')])
     stages {
         stage('Clone repository') {
-            setup("${params.destination_environment}")
             steps {
+                setup("${params.destination_environment}")
                 script {
                     checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]],
                     doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
