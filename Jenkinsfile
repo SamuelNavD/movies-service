@@ -1,5 +1,3 @@
-println("Environment: ${destination_environment}") //This is a variable that must be created on Jenkins.
-
 def account           = '411794735725'
 def cluster_name      = 'android'
 def service_name      = "movies"
@@ -9,19 +7,19 @@ def role              = 'JenkinsAccess'
 
 def github_repository = 'https://github.com/jjhernandez-usj/movies-service'
 def git_credentials   = '28316e5b-7f86-4e26-aff2-cf22c1f6c3b9'
-def ecr_registry_url  = ''
 
-def setup(environment) {
-    if(destination_environment == 'prod' ) {
+if(destination_environment == 'prod' ) {
         branch = 'master'
-    }
-    cluster = "${cluster_name}-${destination_environment}"
-    namespace = "${cluster}"
-    service = "${service_name}-${destination_environment}-service"
-    docker_image_name = "${service_name}"
-    task = "${service_name}-${destination_environment}-task"
-    ecr_registry_url = "${account}.dkr.ecr.${region}.amazonaws.com"
 }
+
+cluster = "${cluster_name}-${destination_environment}"
+namespace = "${cluster}"
+service = "${service_name}-${destination_environment}-service"
+docker_image_name = "${service_name}"
+task = "${service_name}-${destination_environment}-task"
+
+def ecr_registry_url  = "${account}.dkr.ecr.${region}.amazonaws.com"
+
 
 
 pipeline {
