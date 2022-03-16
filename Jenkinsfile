@@ -27,7 +27,7 @@ def setup(environment) {
 pipeline {
 
     agent any
-    properties([[$class: 'JiraProjectProperty'], parameters([string(defaultValue: 'dev', name: 'destination_environment')])])
+    options([[$class: 'JiraProjectProperty'], parameters([string(defaultValue: 'dev', name: 'destination_environment')])])
     stages {
         stage('Clone repository') {
             setup("${params.destination_environment}")
