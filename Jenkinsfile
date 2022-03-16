@@ -6,7 +6,8 @@ def region            = 'eu-west-1'
 def role              = 'JenkinsAccess'
 
 def github_repository = 'https://github.com/jjhernandez-usj/movies-service'
-def git_credentials   = '28316e5b-7f86-4e26-aff2-cf22c1f6c3b9'
+def git_credentials   = 'github-multibranch'
+//'28316e5b-7f86-4e26-aff2-cf22c1f6c3b9'
 
 if(destination_environment == 'prod' ) {
         branch = 'master'
