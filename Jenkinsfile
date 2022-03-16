@@ -25,7 +25,9 @@ def ecr_registry_url  = "${account}.dkr.ecr.${region}.amazonaws.com"
 pipeline {
 
     agent any
-
+    parameters {
+        string(name: 'destination_environment', defaultValue: 'dev', description: 'Destination environment')
+    }
     stages {
         stage('Clone repository') {
             steps {
