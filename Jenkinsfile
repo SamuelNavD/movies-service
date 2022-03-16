@@ -27,6 +27,7 @@ def setup(environment) {
 pipeline {
 
     agent any
+
     parameters {
             string(name: 'destination_environment', defaultValue: 'dev', description: 'Destination environment')
     }
