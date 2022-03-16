@@ -32,7 +32,6 @@ pipeline {
     stages {
         stage('Clone repository') {
             steps {
-                setup("${params.destination_environment}")
                 script {
                     checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]],
                     doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
