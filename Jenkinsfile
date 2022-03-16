@@ -9,18 +9,20 @@ def role              = 'JenkinsAccess'
 
 def github_repository = 'https://github.com/jjhernandez-usj/movies-service'
 def git_credentials   = '28316e5b-7f86-4e26-aff2-cf22c1f6c3b9'
+def ecr_registry_url  = ''
 
-if(destination_environment == 'prod' ) {
-    branch = 'master'
+def setup(environment) {
+    if(destination_environment == 'prod' ) {
+        branch = 'master'
+    }
+    cluster = "${cluster_name}-${destination_environment}"
+    namespace = "${cluster}"
+    service = "${service_name}-${destination_environment}-service"
+    docker_image_name = "${service_name}"
+    task = "${service_name}-${destination_environment}-task"
+    ecr_registry_url = "${account}.dkr.ecr.${region}.amazonaws.com"
 }
 
-cluster = "${cluster_name}-${destination_environment}"
-namespace = "${cluster}"
-service = "${service_name}-${destination_environment}-service"
-docker_image_name = "${service_name}"
-task = "${service_name}-${destination_environment}-task"
-
-def ecr_registry_url  = "${account}.dkr.ecr.${region}.amazonaws.com"
 
 pipeline {
 
@@ -30,6 +32,7 @@ pipeline {
     }
     stages {
         stage('Clone repository') {
+            setup("${params.destination_environment}")
             steps {
                 script {
                     checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]],
