@@ -80,13 +80,13 @@ class OffsetBasedPageRequest(offset: Long, limit: Int, sort: Sort) : Pageable, S
         return _offset > _pageSize
     }
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) return true
-        if (o !is OffsetBasedPageRequest) return false
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is OffsetBasedPageRequest) return false
         return EqualsBuilder()
-            .append(_pageSize, o._pageSize)
-            .append(_offset, o._offset)
-            .append(sort, o.sort)
+            .append(_pageSize, other._pageSize)
+            .append(_offset, other._offset)
+            .append(sort, other.sort)
             .isEquals
     }
 
