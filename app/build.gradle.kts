@@ -16,7 +16,7 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-api:0.11.2")
     implementation("org.springframework.boot:spring-boot-starter-validation:2.6.4")
     implementation("org.springframework.boot:spring-boot-starter-web-services:2.6.4")
-    implementation("com.github.joschi.jackson:jackson-datatype-threetenbp:2.6.4")
+    implementation("com.github.joschi.jackson:jackson-datatype-threetenbp:2.12.5")
     implementation("com.h2database:h2:2.1.210")
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("io.springfox:springfox-boot-starter:3.0.0")

@@ -1,11 +1,10 @@
 package es.usj.androidapps.config
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.core.JsonTokenId
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.JsonDeserializer
-import com.fasterxml.jackson.datatype.threetenbp.DateTimeUtils
 import com.fasterxml.jackson.datatype.threetenbp.DecimalUtils
 import com.fasterxml.jackson.datatype.threetenbp.deser.ThreeTenDateTimeDeserializerBase
 import com.fasterxml.jackson.datatype.threetenbp.function.BiFunction
@@ -55,7 +54,7 @@ class CustomInstantDeserializer<T : Temporal?> : ThreeTenDateTimeDeserializerBas
         adjust = base.adjust
     }
 
-    override fun withDateFormat(dtf: DateTimeFormatter): JsonDeserializer<T> {
+    override fun withDateFormat(dtf: DateTimeFormatter): ThreeTenDateTimeDeserializerBase<T>? {
         return if (dtf === _formatter) {
             this
         } else CustomInstantDeserializer(this, dtf)
@@ -117,7 +116,7 @@ class CustomInstantDeserializer<T : Temporal?> : ThreeTenDateTimeDeserializerBas
 
     private fun getZone(context: DeserializationContext): ZoneId? {
         // Instants are always in UTC, so don't waste compute cycles
-        return if (_valueClass === Instant::class.java) null else DateTimeUtils.timeZoneToZoneId(context.timeZone)
+        return if (_valueClass === Instant::class.java) null else DateTimeUtils.toZoneId(context.timeZone)
     }
 
     class FromIntegerArguments(val value: Long, val zoneId: ZoneId?)
@@ -147,5 +146,13 @@ class CustomInstantDeserializer<T : Temporal?> : ThreeTenDateTimeDeserializerBas
         ) { zonedDateTime, zoneId -> zonedDateTime.withZoneSameInstant(zoneId) }
 
         private const val serialVersionUID = 1L
+    }
+
+    override fun withLeniency(leniency: Boolean?): ThreeTenDateTimeDeserializerBase<T> {
+        return this
+    }
+
+    override fun withShape(shape: JsonFormat.Shape?): ThreeTenDateTimeDeserializerBase<T> {
+        return this
     }
 }
