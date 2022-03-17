@@ -1,8 +1,9 @@
 FROM openjdk:11-jre
-ENV APP_FILE app-plain.jar
+ENV APP_FILE app.jar
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
 EXPOSE 8080
+RUN ls -la ./app/build/libs/
 COPY ./app/build/libs/$APP_FILE /app/$APP_FILE
 CMD mkdir /certs
 COPY AmazonRootCA1.cer /certs/

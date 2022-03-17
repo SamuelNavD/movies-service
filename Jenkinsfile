@@ -7,7 +7,6 @@ def role              = 'JenkinsRole'
 
 def github_repository = 'https://github.com/jjhernandez-usj/movies-service'
 def git_credentials   = 'github-multibranch'
-//'28316e5b-7f86-4e26-aff2-cf22c1f6c3b9'
 
 if(destination_environment == 'prod' ) {
         branch = 'master'
@@ -21,14 +20,12 @@ task = "${service_name}-${destination_environment}-task"
 
 def ecr_registry_url  = "${account}.dkr.ecr.${region}.amazonaws.com"
 
-
-
 pipeline {
 
     agent any
 
     parameters {
-            string(name: 'destination_environment', defaultValue: 'dev', description: 'Destination environment')
+            string(name: 'destination_environment', defaultValue: 'prod', description: 'Destination environment')
     }
     stages {
         stage('Clone repository') {
