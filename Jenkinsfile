@@ -3,7 +3,7 @@ def cluster_name      = 'android'
 def service_name      = "movies"
 def branch            = 'develop'
 def region            = 'eu-west-1'
-def role              = 'JenkinsAccess'
+def role              = 'JenkinsRole'
 
 def github_repository = 'https://github.com/jjhernandez-usj/movies-service'
 def git_credentials   = 'github-multibranch'
