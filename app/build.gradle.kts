@@ -5,7 +5,7 @@ plugins {
 
 
 
-springBoot { mainClass.set("es.usj.androidapps.MoviesServiceMsApplication") }
+springBoot { mainClass.set("es.usj.androidapps.MoviesServiceMsApplicationKt") }
 
 repositories {
     mavenCentral()

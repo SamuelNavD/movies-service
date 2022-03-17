@@ -55,6 +55,11 @@ allOpen {
     annotation("org.springframework.context.annotation.Bean")
 }
 
+application {
+    mainClass.set("es.usj.androidapps.MoviesServiceMsApplicationKt")
+}
+
+
 subprojects {
 
     apply {
