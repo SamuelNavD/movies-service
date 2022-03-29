@@ -7,7 +7,10 @@ def role              = 'JenkinsRole'
 
 def github_repository = 'https://github.com/jjhernandez-usj/movies-service'
 def git_credentials   = 'github-multibranch'
-def destination_environment = if(env.BRANCH_NAME == 'master') 'prod' else 'dev'
+def destination_environment = 'prod' 
+if(env.BRANCH_NAME != 'master') {
+    destination_environment = 'dev'
+}
 println(env.BRANCH_NAME)
 cluster = "${cluster_name}-${destination_environment}"
 namespace = "${cluster}"
