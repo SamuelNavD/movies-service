@@ -8,10 +8,11 @@ def role              = 'JenkinsRole'
 def github_repository = 'https://github.com/jjhernandez-usj/movies-service'
 def git_credentials   = 'github-multibranch'
 def destination_environment = 'prod' 
-if(env.BRANCH_NAME != 'master') {
+if(scm.branches[0].name.split("/")[1] != 'master') {
     destination_environment = 'dev'
 }
-println(env.BRANCH_NAME)
+println(destination_environment)
+println(scm.branches[0].name.split("/")[1])
 cluster = "${cluster_name}-${destination_environment}"
 namespace = "${cluster}"
 service = "${service_name}-${destination_environment}-service"
@@ -24,9 +25,6 @@ pipeline {
 
     agent any
 
-    parameters {
-            string(name: 'destination_environment', defaultValue: 'prod', description: 'Destination environment')
-    }
     stages {
         stage('Clone repository') {
             steps {
