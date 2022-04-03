@@ -1030,8 +1030,6 @@ INSERT INTO actors VALUES (1866, 'Joshua Leonard');
 INSERT INTO actors VALUES (1884, 'Joshua McIvor');
 INSERT INTO actors VALUES (404, 'Jovan Adepo');
 INSERT INTO actors VALUES (547, 'Juan Saavedra');
-INSERT INTO actors VALUES (2000, 'Juanjo');
-INSERT INTO actors VALUES (2001, 'Juanjo1');
 INSERT INTO actors VALUES (1070, 'Judah Lewis');
 INSERT INTO actors VALUES (685, 'Jude Law');
 INSERT INTO actors VALUES (377, 'Judi Dench');

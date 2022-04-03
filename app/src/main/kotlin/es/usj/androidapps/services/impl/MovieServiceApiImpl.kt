@@ -49,6 +49,7 @@ class MovieServiceApiImpl : MovieServiceApi {
 
     override fun save(element: MovieDTO): MovieDTO {
         val item = DataConverter.movieFromDTO(element)
+        item.id = movieRepository.findFirstByOrderByIdDesc().id + 1
         return DataConverter.movieToDTO(movieRepository.save(item))
     }
 

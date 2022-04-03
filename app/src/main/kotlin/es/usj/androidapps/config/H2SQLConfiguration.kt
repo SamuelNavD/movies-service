@@ -1,7 +1,6 @@
 package es.usj.androidapps.config
 
 import es.usj.androidapps.model.Actor
-import es.usj.androidapps.model.AppUser
 import es.usj.androidapps.model.Genre
 import es.usj.androidapps.model.Movie
 import org.h2.tools.Server
@@ -83,7 +82,6 @@ class H2SQLConfiguration {
         settings[Environment.PASS] = password
         val serviceRegistry = StandardServiceRegistryBuilder().applySettings(settings).build()
         val metadataSources = MetadataSources(serviceRegistry)
-        metadataSources.addAnnotatedClass(AppUser::class.java)
         metadataSources.addAnnotatedClass(Actor::class.java)
         metadataSources.addAnnotatedClass(Movie::class.java)
         metadataSources.addAnnotatedClass(Genre::class.java)

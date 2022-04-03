@@ -9,7 +9,7 @@ import javax.persistence.*
 class Movie(
     @Id
     @GeneratedValue
-    val id: Long,
+    var id: Long,
     @Column(length = 250)
     val title: String,
     @Column(columnDefinition = "TEXT")

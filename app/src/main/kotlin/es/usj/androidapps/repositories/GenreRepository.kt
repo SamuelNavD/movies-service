@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface GenreRepository : JpaRepositoryImplementation<Genre, Long> {
+    fun findFirstByOrderByIdDesc() : Genre
 }

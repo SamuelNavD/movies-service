@@ -40,12 +40,15 @@ class GenreServiceApiImpl : GenreServiceApi {
 
     override fun save(element: GenreDTO): GenreDTO {
         val item = DataConverter.genreFromDTO(element)
+        item.id = genreRepository.findFirstByOrderByIdDesc().id + 1
         return DataConverter.genreToDTO(genreRepository.save(item))
     }
 
     override fun edit(element: GenreDTO): Int {
         val item = DataConverter.genreFromDTO(element)
-        genreRepository.save(item)
+        val genre = genreRepository.findById(item.id).get()
+        genre.name = item.name
+        genreRepository.save(genre)
         return 1
     }
 }

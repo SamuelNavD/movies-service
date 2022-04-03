@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ActorRepository : JpaRepositoryImplementation<Actor, Long> {
+    fun findFirstByOrderByIdDesc() : Actor
 }

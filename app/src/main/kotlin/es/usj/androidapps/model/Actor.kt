@@ -6,10 +6,9 @@ import javax.persistence.*
 @Table(name = "actors")
 class Actor(
     @Id
-    @GeneratedValue
-    val id: Long,
+    var id: Long,
     @Column(unique = true)
-    val name: String,
+    var name: String,
     @ManyToMany(mappedBy = "actors")
     val movies: MutableList<Movie> = mutableListOf()
 ) {

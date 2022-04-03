@@ -1,17 +1,17 @@
 package es.usj.androidapps.model.dto
 
 data class MovieDTO(
-    val id: Long,
-    var title: String,
-    val description: String,
-    val director: String,
-    val year: Int,
-    val runtime: Int,
-    val rating: Double,
-    val votes: Long,
-    val revenue: Double,
-    val actors: List<Long> = emptyList(),
-    val genres: List<Long> = emptyList()
+    var id: Long = 0,
+    var title: String = "",
+    var description: String = "",
+    var director: String = "",
+    var year: Int = 0,
+    var runtime: Int = 0,
+    var rating: Double = 0.0,
+    var votes: Long = 0,
+    var revenue: Double = 0.0,
+    var actors: List<Long> = emptyList(),
+    var genres: List<Long> = emptyList()
 ) {
     init {
         title = title.trim()

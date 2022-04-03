@@ -41,12 +41,15 @@ class ActorServiceApiImpl : ActorServiceApi {
 
     override fun save(element: ActorDTO): ActorDTO {
         val item = DataConverter.actorFromDTO(element)
+        item.id = actorRepository.findFirstByOrderByIdDesc().id + 1
         return DataConverter.actorToDTO(actorRepository.save(item))
     }
 
     override fun edit(element: ActorDTO): Int {
         val item = DataConverter.actorFromDTO(element)
-        actorRepository.save(item)
+        val actor = actorRepository.findById(item.id).get()
+        actor.name = item.name
+        actorRepository.save(actor)
         return 1
     }
 }

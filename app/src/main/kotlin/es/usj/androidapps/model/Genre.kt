@@ -7,9 +7,9 @@ import javax.persistence.*
 class Genre(
     @Id
     @GeneratedValue
-    val id: Long,
+    var id: Long,
     @Column(unique = true)
-    val name: String,
+    var name: String,
     @ManyToMany(mappedBy = "genres")
     val movies: MutableList<Movie> = mutableListOf()
 ) {

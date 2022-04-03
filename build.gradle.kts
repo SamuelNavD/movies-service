@@ -81,15 +81,10 @@ subprojects {
         implementation("com.squareup.okhttp3:okhttp:4.9.3")
         implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
         implementation("org.web3j:core:4.8.9")
-        //OpenApiGenerator
-        implementation("org.openapitools:jackson-databind-nullable:0.2.1")
-
-        testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.6")
+        testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.5")
         testImplementation(platform("org.junit:junit-bom:5.7.2"))
-        testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
-        testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.6")
-        testImplementation("org.testcontainers:postgresql:1.16.2")
-        testImplementation("org.testcontainers:junit-jupiter:1.16.2")
+        testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+        testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.5")
     }
 }
 
@@ -125,29 +120,6 @@ tasks.withType<Test> {
     }
 }
 
-val service = "movies"
-
-val kotlin = Action<org.openapitools.generator.gradle.plugin.extensions.OpenApiGeneratorGenerateExtension> {
-    inputSpec.set("$rootDir/docs/$service-api.yaml")
-    outputDir.set("${project.projectDir}/$service-client")
-    apiPackage.set("$group.$service.api")
-    invokerPackage.set("$group.$service.invoker")
-    modelPackage.set("$group.$service.model")
-    generatorName.set("java")
-    configOptions.apply {
-        mapOf(
-            "hideGenerationTimestamp" to "true",
-            "library" to "jvm-retrofit2",
-            "serializationLibrary" to "gson",
-            "dateLibrary" to "java8",
-            "packageName" to "${group}.$service.api",
-            "enumPropertyNaming" to "original",
-            "collectionType" to "list",
-            "useCoroutines" to true,
-            "groupId" to "${project.group}.$service",
-            "artifactId" to "$service-client"
-        )
-    }
+tasks.getByName<Test>("test") {
+    useJUnitPlatform()
 }
-
-openApiGenerate(kotlin)
