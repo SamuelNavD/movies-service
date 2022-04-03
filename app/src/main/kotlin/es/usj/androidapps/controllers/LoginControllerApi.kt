@@ -39,6 +39,6 @@ interface LoginControllerApi {
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun login(@RequestBody @Valid body: LoginRequestDTO): ResponseEntity<LoginResponseDTO>
+    fun login(@Valid @RequestBody body: LoginRequestDTO): ResponseEntity<LoginResponseDTO>
 
 }

@@ -131,14 +131,14 @@ class CustomInstantDeserializer<T : Temporal?> : ThreeTenDateTimeDeserializerBas
             { a -> Instant.ofEpochSecond(a.integer, a.fraction.toLong()) },
             null
         )
-        val OFFSET_DATE_TIME: CustomInstantDeserializer<OffsetDateTime> = CustomInstantDeserializer<OffsetDateTime>(
+        val OFFSET_DATE_TIME: CustomInstantDeserializer<OffsetDateTime> = CustomInstantDeserializer(
             OffsetDateTime::class.java, DateTimeFormatter.ISO_OFFSET_DATE_TIME,
             { temporalAccessor -> OffsetDateTime.from(temporalAccessor) },
             { a -> OffsetDateTime.ofInstant(Instant.ofEpochMilli(a.value), a.zoneId) },
             { a -> OffsetDateTime.ofInstant(Instant.ofEpochSecond(a.integer, a.fraction.toLong()), a.zoneId) }
         ) { d, z -> d.withOffsetSameInstant(z?.rules?.getOffset(d.toLocalDateTime())) }
 
-        val ZONED_DATE_TIME: CustomInstantDeserializer<ZonedDateTime> = CustomInstantDeserializer<ZonedDateTime>(
+        val ZONED_DATE_TIME: CustomInstantDeserializer<ZonedDateTime> = CustomInstantDeserializer(
             ZonedDateTime::class.java, DateTimeFormatter.ISO_ZONED_DATE_TIME,
             { temporalAccessor -> ZonedDateTime.from(temporalAccessor) },
             { a -> ZonedDateTime.ofInstant(Instant.ofEpochMilli(a.value), a.zoneId) },
