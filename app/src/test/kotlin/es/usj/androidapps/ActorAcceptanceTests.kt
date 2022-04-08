@@ -3,6 +3,7 @@ package es.usj.androidapps
 import com.fasterxml.jackson.databind.ObjectMapper
 import es.usj.androidapps.infrastructure.BaseTest
 import es.usj.androidapps.infrastructure.TestProperties
+import es.usj.androidapps.model.Actor
 import es.usj.androidapps.model.dto.ActorDTO
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
@@ -38,4 +39,17 @@ class ActorAcceptanceTests : BaseTest(TestProperties.local()) {
         assert(returned.id > size)
         assert(list<ActorDTO>(PATH, null, null).count() > size)
     }
+
+    /*  ----   NO FUNCIONA
+    @Test
+    fun `delete an actor by id works`() {
+        val actorID = 23L
+        val actor = list<ActorDTO>(PATH, null, null).filter { it?.id == actorID }
+        "/actors".DELETE<ActorDTO>(queryParams = arrayOf("id" to actorID.toString()))
+
+        val actorAfterDelete = list<ActorDTO>(PATH, null, null).filter { it?.id == actorID }
+
+        assert(actor != null)
+        assert(actorAfterDelete == null)
+    }*/
 }
