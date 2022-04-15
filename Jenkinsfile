@@ -64,7 +64,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh "aws ecs update-service --force-new-deployment --cluster ${cluster} --region ${region} --service ${service} --task-definition ${task} --desired-count 2"
+                    sh "aws ecs update-service --force-new-deployment --cluster ${cluster} --region ${region} --service ${service} --task-definition ${task} --desired-count 1"
                 }
             }
         }
