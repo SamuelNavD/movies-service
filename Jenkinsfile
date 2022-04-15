@@ -1,11 +1,11 @@
-def account           = '411794735725'
+def account           = '639871842013'
 def cluster_name      = 'android'
 def service_name      = "movies"
 def branch            = 'develop'
 def region            = 'eu-west-1'
 def role              = 'JenkinsRole'
 
-def github_repository = 'https://github.com/jjhernandez-usj/movies-service'
+def github_repository = 'https://github.com/SamuelNavD/movies-service.git'
 def git_credentials   = 'github-multibranch'
 
 if(destination_environment == 'prod' ) {
