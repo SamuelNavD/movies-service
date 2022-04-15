@@ -16,8 +16,7 @@ cluster = "${cluster_name}-${destination_environment}"
 namespace = "${cluster}"
 service = "${service_name}-${destination_environment}-service"
 docker_image_name = "${service_name}"
-//task = "${service_name}-${destination_environment}-task"
-task = "${service_name}"
+task = "${service_name}-${destination_environment}-task"
 
 def ecr_registry_url  = "${account}.dkr.ecr.${region}.amazonaws.com"
 
@@ -65,7 +64,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh "aws ecs update-service --force-new-deployment --cluster ${cluster} --region ${region} --service ${service} --task-definition ${task} --desired-count 1"
+                    sh "aws ecs update-service --force-new-deployment --cluster ${cluster} --region ${region} --service ${service} --task-definition ${task} --desired-count 2"
                 }
             }
         }
