@@ -1,5 +1,6 @@
 def account           = '639871842013'
-def cluster_name      = 'android'
+//def cluster_name      = 'android'
+def cluster_name      = 'movies'
 def service_name      = "movies"
 def branch            = 'develop'
 def region            = 'eu-west-1'
