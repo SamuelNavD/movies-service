@@ -3,7 +3,9 @@ ENV APP_FILE app.jar
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
 EXPOSE 8080
-CMD ["pwd", "ls"]
+RUN pwd
+RUN ls
+RUN ls /
 COPY /app/build/libs/$APP_FILE /app/$APP_FILE
 WORKDIR $APP_HOME
 ENTRYPOINT ["sh", "-c"]
