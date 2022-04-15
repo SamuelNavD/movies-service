@@ -5,5 +5,6 @@ RUN mkdir $APP_HOME
 EXPOSE 8080
 COPY /app/build/libs/$APP_FILE /app/$APP_FILE
 WORKDIR $APP_HOME
+CMD ["pwd", "ls"]
 ENTRYPOINT ["sh", "-c"]
 CMD ["exec java -jar $APP_FILE"]
