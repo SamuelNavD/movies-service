@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
-@Api(value = "Existing Building Book Service", description = "Existing Building Book API")
+@Api(value = "Existing Building Book Service", description = "Existing Building Book API", tags = ["Actors"])
 @RequestMapping("actors")
 interface ActorControllerApi {
 
@@ -18,8 +18,7 @@ interface ActorControllerApi {
         value = "Create a new actor.",
         nickname = "createActor",
         notes = "Create a new actor.",
-        response = ActorDTO::class,
-        tags = ["Actors"]
+        response = ActorDTO::class
     )
     @ApiResponses(
         value = [
@@ -42,8 +41,7 @@ interface ActorControllerApi {
         value = "Updates a new actor.",
         nickname = "updateActor",
         notes = "Updates a new actor.",
-        response = Int::class,
-        tags = ["Actors"]
+        response = Int::class
     )
     @ApiResponses(
         value = [
@@ -66,8 +64,7 @@ interface ActorControllerApi {
         value = "Deletes a new actor.",
         nickname = "deleteActor",
         notes = "Deletes a new actor.",
-        response = ActorDTO::class,
-        tags = ["Actors"]
+        response = ActorDTO::class
     )
     @ApiResponses(
         value = [
@@ -89,8 +86,7 @@ interface ActorControllerApi {
         value = "Get actor by id.",
         nickname = "getActorById",
         notes = "Get actor by id.",
-        response = ActorDTO::class,
-        tags = ["Actors"]
+        response = ActorDTO::class
     )
     @ApiResponses(
         value = [
@@ -115,8 +111,7 @@ interface ActorControllerApi {
         nickname = "getActors",
         notes = "Create a new actor.",
         response = ActorDTO::class,
-        responseContainer = "List",
-        tags = ["Actors"]
+        responseContainer = "List"
     )
     @ApiResponses(
         value = [

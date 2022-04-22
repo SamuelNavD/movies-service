@@ -11,7 +11,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
-@Api(value = "Existing Building Book Service", description = "Existing Building Book API")
+@Api(value = "Existing Building Book Service", description = "Existing Building Book API",
+    tags = ["Genres"])
 @RequestMapping("genres")
 interface GenreControllerApi {
 
@@ -19,8 +20,7 @@ interface GenreControllerApi {
         value = "Create a new genre.",
         nickname = "createGenre",
         notes = "Create a new genre.",
-        response = GenreDTO::class,
-        tags = ["Genres"]
+        response = GenreDTO::class
     )
     @ApiResponses(
         value = [
@@ -43,8 +43,7 @@ interface GenreControllerApi {
         value = "Updates a new genre.",
         nickname = "updateGenre",
         notes = "Updates a new genre.",
-        response = Int::class,
-        tags = ["Genres"]
+        response = Int::class
     )
     @ApiResponses(
         value = [
@@ -67,8 +66,7 @@ interface GenreControllerApi {
         value = "Deletes a new genre.",
         nickname = "deleteGenre",
         notes = "Deletes a new genre.",
-        response = GenreDTO::class,
-        tags = ["Genres"]
+        response = GenreDTO::class
     )
     @ApiResponses(
         value = [
@@ -90,8 +88,7 @@ interface GenreControllerApi {
         value = "Get genre by id.",
         nickname = "getGenreById",
         notes = "Get genre by id.",
-        response = GenreDTO::class,
-        tags = ["Genres"]
+        response = GenreDTO::class
     )
     @ApiResponses(
         value = [
@@ -116,8 +113,7 @@ interface GenreControllerApi {
         nickname = "getGenres",
         notes = "Create a new genre.",
         response = GenreDTO::class,
-        responseContainer = "List",
-        tags = ["Genres"]
+        responseContainer = "List"
     )
     @ApiResponses(
         value = [
