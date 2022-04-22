@@ -10,9 +10,13 @@ def git_credentials   = 'github-multibranch'
 
 if(destination_environment == 'prod' ) {
         branch = 'master'
+        full_destination_environment = destination_environment
+} else if (destination_environment == 'develop') {
+        branch = 'develop'
+        full_destination_environment = 'dev'
 }
 
-cluster = "${cluster_name}-${destination_environment}"
+cluster = "${cluster_name}-${full_destination_environment}"
 namespace = "${cluster}"
 service = "${service_name}-${destination_environment}-service"
 docker_image_name = "${service_name}"
