@@ -12,11 +12,11 @@ if(destination_environment == 'prod' ) {
         branch = 'master'
 }
 
-cluster = "${cluster_name}-${destination_environment}"
-namespace = "${cluster}"
-service = "${service_name}-${destination_environment}-service"
-docker_image_name = "${service_name}"
-task = "${service_name}-${destination_environment}-task"
+cluster = "android-dev"
+namespace = "android-dev"
+service = "movies-dev-service"
+docker_image_name = "movies"
+task = "movies-dev-task"
 
 def ecr_registry_url  = "${account}.dkr.ecr.${region}.amazonaws.com"
 
