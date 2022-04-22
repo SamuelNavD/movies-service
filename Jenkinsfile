@@ -11,9 +11,9 @@ def git_credentials   = 'github-multibranch'
 if(destination_environment == 'prod' ) {
         branch = 'master'
         full_destination_environment = destination_environment
-} else if (destination_environment == 'develop') {
+} else if (destination_environment == 'dev') {
         branch = 'develop'
-        full_destination_environment = 'dev'
+        full_destination_environment = 'develop'
 }
 
 cluster = "${cluster_name}-${full_destination_environment}"
