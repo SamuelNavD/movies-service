@@ -1,7 +1,7 @@
 def account           = '411794735725'
 def cluster_name      = 'android'
 def service_name      = "movies"
-def branch            = 'develop'
+def branch            = 'master'
 def region            = 'eu-west-1'
 def role              = 'JenkinsRole'
 
