@@ -4,6 +4,7 @@ def service_name      = "movies"
 def branch            = 'develop'
 def region            = 'eu-west-1'
 def role              = 'JenkinsRole'
+def full_destination_environment = 'develop'
 
 def github_repository = 'https://github.com/SamuelNavD/movies-service.git'
 def git_credentials   = 'github-multibranch'
@@ -13,7 +14,6 @@ if(destination_environment == 'prod' ) {
         full_destination_environment = destination_environment
 } else if (destination_environment == 'dev') {
         branch = 'develop'
-        full_destination_environment = 'develop'
 }
 
 cluster = "${cluster_name}-${full_destination_environment}"
