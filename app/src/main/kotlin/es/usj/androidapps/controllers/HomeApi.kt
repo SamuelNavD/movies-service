@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 
 
-@Api(value = "Home", description = "Home Api")
+@Api(value = "Home", description = "Home Api", tags = ["Home"])
 interface HomeApi {
     @ApiOperation(
         value = "Get a microservice status.",
         nickname = "healthCheck",
         notes = "Status must be equals to OK or error",
-        response = HealthResponseDTO::class,
-        tags = ["Home"]
+        response = HealthResponseDTO::class
     )
     @ApiResponses(
         value = [ApiResponse(code = 200, message = "OK.", response = HealthResponseDTO::class),
