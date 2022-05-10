@@ -1,6 +1,7 @@
 package es.usj.androidapps.controllers
 
 import es.usj.androidapps.model.dto.ActorDTO
+import es.usj.androidapps.model.dto.CountDTO
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
@@ -41,11 +42,11 @@ interface ActorControllerApi {
         value = "Updates a new actor.",
         nickname = "updateActor",
         notes = "Updates a new actor.",
-        response = Int::class
+        response = CountDTO::class
     )
     @ApiResponses(
         value = [
-            ApiResponse(code = 200, message = "OK.", response = Int::class),
+            ApiResponse(code = 200, message = "OK.", response = CountDTO::class),
             ApiResponse(code = 400, message = "Invalid Credentials.", response = Error::class),
             ApiResponse(code = 401, message = "Unauthorized.", response = Error::class),
             ApiResponse(code = 403, message = "Forbidden.", response = Error::class),
@@ -56,9 +57,9 @@ interface ActorControllerApi {
     @RequestMapping(
         method = [RequestMethod.PUT],
         consumes = [MediaType.APPLICATION_JSON_VALUE],
-        produces = [MediaType.TEXT_PLAIN_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun updateActor(@RequestBody @Valid actorDTO: ActorDTO): ResponseEntity<Int>
+    fun updateActor(@RequestBody @Valid actorDTO: ActorDTO): ResponseEntity<CountDTO>
 
     @ApiOperation(
         value = "Deletes a new actor.",
@@ -77,6 +78,7 @@ interface ActorControllerApi {
         ]
     )
     @RequestMapping(
+        value = ["/{id}"],
         method = [RequestMethod.DELETE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )

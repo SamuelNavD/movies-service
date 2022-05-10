@@ -6,7 +6,6 @@ import javax.persistence.*
 @Table(name = "genres")
 class Genre(
     @Id
-    @GeneratedValue
     var id: Long,
     @Column(unique = true)
     var name: String,

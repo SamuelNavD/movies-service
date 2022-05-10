@@ -1,13 +1,31 @@
 package es.usj.androidapps.infrastructure
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jsonMapper
 import org.eclipse.jetty.http.HttpMethod
 import org.glassfish.jersey.client.ClientProperties
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
+import java.util.ArrayList
+import javax.ws.rs.ForbiddenException
+import javax.ws.rs.NotAuthorizedException
 import javax.ws.rs.WebApplicationException
 import javax.ws.rs.client.Entity
 
 abstract class BaseTest(val p: TestProperties) {
+
+    protected inline fun <reified RETURN> String.GET(
+        objectMapper: ObjectMapper = jsonMapper(),
+        headers: Map<String, String>? = null,
+        vararg queryParams: Pair<String, String>
+    ): List<RETURN> {
+        val result = this.request<Any>(method = HttpMethod.GET, headers = headers, queryParams = queryParams)
+        val response = objectMapper.typeFactory.constructCollectionType(
+            ArrayList::class.java,
+            RETURN::class.java
+        )
+        return objectMapper.convertValue(result, response)
+    }
 
     protected inline fun <reified RETURN> String.POST(
         entity: Any,
@@ -49,6 +67,7 @@ abstract class BaseTest(val p: TestProperties) {
         queryParams.forEach { (k, v) ->
             target = target.queryParam(k, URLEncoder.encode(v, StandardCharsets.UTF_8.toString()))
         }
+
         return try {
             target.request().apply {
                 if (p.token.isNotBlank()) header("Authorization", "Bearer ${p.token}")
@@ -58,7 +77,10 @@ abstract class BaseTest(val p: TestProperties) {
             }.method(method.toString(), body?.let { Entity.json(it) }, RETURN::class.java)
         } catch (e: Exception) {
             when (e) {
+                is NotAuthorizedException -> println(e.message)
+                is ForbiddenException -> println(e.message)
                 is WebApplicationException -> println(e.response.readEntity(String::class.java))
+                else -> println(e.message)
             }
             throw e
         }

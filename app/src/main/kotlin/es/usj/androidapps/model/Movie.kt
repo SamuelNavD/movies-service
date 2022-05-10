@@ -8,7 +8,6 @@ import javax.persistence.*
 @Table(name = "movies")
 class Movie(
     @Id
-    @GeneratedValue
     var id: Long,
     @Column(length = 250)
     val title: String,
