@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
-@Api(value = "Existing Building Book Service", description = "Existing Building Book API", tags = ["Actors"])
+@Api(value = "Actors", description = "Actors API", tags = ["Actors"])
 @RequestMapping("actors")
 interface ActorControllerApi {
 
