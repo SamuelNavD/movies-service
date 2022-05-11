@@ -114,6 +114,10 @@ class AcceptanceTests : BaseTest(TestProperties.local()) {
         val item = createMovieDTO()
         val returned = MOVIE_PATH.POST<MovieDTO>(item)
         assert(returned.id > size)
+        assert(returned.actors.size == item.actors.size)
+        assert(returned.actors.sorted().toString() == item.actors.sorted().toString())
+        assert(returned.genres.size == item.genres.size)
+        assert(returned.genres.sorted().toString() == item.genres.sorted().toString())
         assert(MOVIE_PATH.GET<MovieDTO>(jsonMapper()).count() > size)
     }
 
@@ -127,6 +131,10 @@ class AcceptanceTests : BaseTest(TestProperties.local()) {
         val edited = "$MOVIE_PATH/${created.id}".GET<MovieDTO>()
         assert(edited.id == created.id)
         assert(edited.title == created.title)
+        assert(edited.actors.size == item.actors.size)
+        assert(edited.actors.sorted().toString() == item.actors.sorted().toString())
+        assert(edited.genres.size == item.genres.size)
+        assert(edited.genres.sorted().toString() == item.genres.sorted().toString())
     }
 
 

@@ -32,7 +32,7 @@ class Movie(
         joinColumns = [JoinColumn(name = "id_actor")],
         inverseJoinColumns = [JoinColumn(name = "id_movie")]
     )
-    val actors: MutableList<Actor> = mutableListOf(),
+    var actors: MutableList<Actor> = mutableListOf(),
     @ManyToMany(cascade = [CascadeType.ALL])
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
@@ -40,7 +40,7 @@ class Movie(
         joinColumns = [JoinColumn(name = "id_genre")],
         inverseJoinColumns = [JoinColumn(name = "id_movie")]
     )
-    val genres: MutableList<Genre> = mutableListOf()
+    var genres: MutableList<Genre> = mutableListOf()
 ) {
     constructor() : this(0, "", "", "", 0, 0, 0.0, 0, 0.0)
 

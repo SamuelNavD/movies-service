@@ -49,6 +49,10 @@ class MovieServiceApiImpl : MovieServiceApi {
 
     override fun save(element: MovieDTO): MovieDTO {
         val item = DataConverter.movieFromDTO(element)
+        val actors = element.actors.map { actorRepository.findById(it).get() }
+        val genres = element.genres.map { genreRepository.findById(it).get() }
+        item.addAllActors(actors.toMutableList())
+        item.addAllGenres(genres.toMutableList())
         item.id = movieRepository.findFirstByOrderByIdDesc().id + 1
         return DataConverter.movieToDTO(movieRepository.save(item))
     }
@@ -56,8 +60,8 @@ class MovieServiceApiImpl : MovieServiceApi {
     override fun edit(element: MovieDTO): Int {
         val item = DataConverter.movieFromDTO(element)
         val genres = element.genres.map { genreRepository.findById(it).get() }
-        item.addAllGenres(genres)
         val actors = element.actors.map { actorRepository.findById(it).get() }
+        item.addAllGenres(genres)
         item.addAllActors(actors)
         movieRepository.save(item)
         return 1
