@@ -6,12 +6,16 @@ import es.usj.androidapps.infrastructure.TestProperties
 import es.usj.androidapps.model.Actor
 import es.usj.androidapps.model.dto.ActorDTO
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 const val PATH = "/actors"
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class ActorAcceptanceTests : BaseTest(TestProperties.local()) {
+
+    @Autowired
+    protected val objectMapper: ObjectMapper? = null
 
     private inline fun <reified U> list(
         path: String,
@@ -26,6 +30,13 @@ class ActorAcceptanceTests : BaseTest(TestProperties.local()) {
                 U::class.java
             )
             return objectMapper.convertValue(result, response)
+        } else {
+            val mapper = ObjectMapper()
+            val response = mapper.typeFactory.constructCollectionType(
+                ArrayList::class.java,
+                U::class.java
+            )
+            return mapper.convertValue(result, response)
         }
         return result
     }
@@ -40,6 +51,7 @@ class ActorAcceptanceTests : BaseTest(TestProperties.local()) {
         assert(list<ActorDTO>(PATH, null, null).count() > size)
     }
 
+<<<<<<< HEAD
     /*  ----   NO FUNCIONA
     @Test
     fun `delete an actor by id works`() {
@@ -52,4 +64,18 @@ class ActorAcceptanceTests : BaseTest(TestProperties.local()) {
         assert(actor != null)
         assert(actorAfterDelete == null)
     }*/
+=======
+    @Test
+    fun `delete an actor by id works`() {
+        /*val actor = list<ActorDTO>(PATH, null, null).filter {
+            it.id == 23L
+        }
+        val deletedActor = "/actors/23".DELETE<ActorDTO>()
+        val actorAfterDelete =  list<ActorDTO>(PATH, null, null).filter {
+            it.id == 23L
+        }
+        assert(actor != null)
+        assert(actorAfterDelete == null)*/
+    }
+>>>>>>> a3da4aecc4c4f275911ca25e86b25597deb48ffb
 }
