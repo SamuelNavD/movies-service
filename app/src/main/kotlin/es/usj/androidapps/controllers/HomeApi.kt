@@ -1,6 +1,7 @@
 package es.usj.androidapps.controllers
 
 import es.usj.androidapps.model.dto.HealthResponseDTO
+import es.usj.androidapps.model.dto.VersionDTO
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
@@ -11,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 
 
-@Api(value = "Home", description = "Home Api",
-    tags = ["Home"])
+@Api(value = "Home", description = "Home Api", tags = ["Home"])
 interface HomeApi {
     @ApiOperation(
         value = "Get a microservice status.",
@@ -36,4 +36,21 @@ interface HomeApi {
         method = [RequestMethod.GET]
     )
     fun index(): String
+
+    @ApiOperation(
+        value = "Get a microservice version.",
+        nickname = "version",
+        notes = "Version must be equals to 1.0.0",
+        response = VersionDTO::class
+    )
+    @ApiResponses(
+        value = [ApiResponse(code = 200, message = "OK.", response = VersionDTO::class),
+            ApiResponse(code = 500, message = "Server error.", response = Error::class)]
+    )
+    @RequestMapping(
+        value = ["/version"],
+        method = [RequestMethod.GET],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    fun version(): ResponseEntity<VersionDTO>
 }

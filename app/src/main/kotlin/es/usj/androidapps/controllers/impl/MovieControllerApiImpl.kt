@@ -1,6 +1,7 @@
 package es.usj.androidapps.controllers.impl
 
 import es.usj.androidapps.controllers.MovieControllerApi
+import es.usj.androidapps.model.dto.CountDTO
 import es.usj.androidapps.model.dto.MovieDTO
 import es.usj.androidapps.services.MovieServiceApi
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,10 +21,10 @@ class MovieControllerApiImpl : MovieControllerApi {
         }
     }
 
-    override fun updateMovie(body: MovieDTO): ResponseEntity<Int> {
+    override fun updateMovie(body: MovieDTO): ResponseEntity<CountDTO> {
         return try {
-            movieService.save(body)
-            ResponseEntity.ok().body(1)
+            val count = movieService.edit(body)
+            ResponseEntity.ok().body(CountDTO(count))
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }

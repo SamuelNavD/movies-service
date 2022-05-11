@@ -1,8 +1,8 @@
 package es.usj.androidapps.controllers
 
+import es.usj.androidapps.model.dto.CountDTO
 import es.usj.androidapps.model.dto.GenreDTO
 import io.swagger.annotations.Api
-import io.swagger.annotations.ApiImplicitParam
 import io.swagger.annotations.ApiOperation
 import io.swagger.annotations.ApiResponse
 import io.swagger.annotations.ApiResponses
@@ -11,8 +11,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
-@Api(value = "Existing Building Book Service", description = "Existing Building Book API",
-    tags = ["Genres"])
+@Api(value = "Genres", description = "Genres API", tags = ["Genres"])
 @RequestMapping("genres")
 interface GenreControllerApi {
 
@@ -43,11 +42,11 @@ interface GenreControllerApi {
         value = "Updates a new genre.",
         nickname = "updateGenre",
         notes = "Updates a new genre.",
-        response = Int::class
+        response = CountDTO::class
     )
     @ApiResponses(
         value = [
-            ApiResponse(code = 200, message = "OK.", response = Int::class),
+            ApiResponse(code = 200, message = "OK.", response = CountDTO::class),
             ApiResponse(code = 400, message = "Invalid Credentials.", response = Error::class),
             ApiResponse(code = 401, message = "Unauthorized.", response = Error::class),
             ApiResponse(code = 403, message = "Forbidden.", response = Error::class),
@@ -58,9 +57,9 @@ interface GenreControllerApi {
     @RequestMapping(
         method = [RequestMethod.PUT],
         consumes = [MediaType.APPLICATION_JSON_VALUE],
-        produces = [MediaType.TEXT_PLAIN_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun updateGenre(@RequestBody @Valid body: GenreDTO): ResponseEntity<Int>
+    fun updateGenre(@RequestBody @Valid body: GenreDTO): ResponseEntity<CountDTO>
 
     @ApiOperation(
         value = "Deletes a new genre.",
@@ -79,6 +78,7 @@ interface GenreControllerApi {
         ]
     )
     @RequestMapping(
+        value = ["/{id}"],
         method = [RequestMethod.DELETE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )

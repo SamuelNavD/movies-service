@@ -1,6 +1,7 @@
 package es.usj.androidapps.controllers.impl
 
 import es.usj.androidapps.controllers.GenreControllerApi
+import es.usj.androidapps.model.dto.CountDTO
 import es.usj.androidapps.model.dto.GenreDTO
 import es.usj.androidapps.services.GenreServiceApi
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,10 +21,10 @@ class GenreControllerApiImpl : GenreControllerApi {
         }
     }
 
-    override fun updateGenre(body: GenreDTO): ResponseEntity<Int> {
+    override fun updateGenre(body: GenreDTO): ResponseEntity<CountDTO> {
         return try {
-            genreService.save(body)
-            ResponseEntity.ok().body(1)
+            val count = genreService.edit(body)
+            ResponseEntity.ok().body(CountDTO(count))
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }

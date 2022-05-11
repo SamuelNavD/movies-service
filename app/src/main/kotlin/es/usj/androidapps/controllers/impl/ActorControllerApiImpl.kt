@@ -2,6 +2,7 @@ package es.usj.androidapps.controllers.impl
 
 import es.usj.androidapps.controllers.ActorControllerApi
 import es.usj.androidapps.model.dto.ActorDTO
+import es.usj.androidapps.model.dto.CountDTO
 import es.usj.androidapps.services.ActorServiceApi
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -21,9 +22,10 @@ class ActorControllerApiImpl : ActorControllerApi {
         }
     }
 
-    override fun updateActor(actorDTO: ActorDTO): ResponseEntity<Int> {
+    override fun updateActor(actorDTO: ActorDTO): ResponseEntity<CountDTO> {
         return try {
-            ResponseEntity.ok().body(actorServiceApi.edit(actorDTO))
+            val count = CountDTO(actorServiceApi.edit(actorDTO))
+            ResponseEntity.ok().body(count)
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }

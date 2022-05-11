@@ -1,5 +1,6 @@
 package es.usj.androidapps.controllers
 
+import es.usj.androidapps.model.dto.CountDTO
 import es.usj.androidapps.model.dto.MovieDTO
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -10,8 +11,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
-@Api(value = "Existing Building Book Service", description = "Existing Building Book API",
-    tags = ["Movies"])
+@Api(value = "Movies", description = "Movies API", tags = ["Movies"])
 @RequestMapping("movies")
 interface MovieControllerApi {
 
@@ -57,9 +57,9 @@ interface MovieControllerApi {
     @RequestMapping(
         method = [RequestMethod.PUT],
         consumes = [MediaType.APPLICATION_JSON_VALUE],
-        produces = [MediaType.TEXT_PLAIN_VALUE]
+        produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun updateMovie(@RequestBody @Valid body: MovieDTO): ResponseEntity<Int>
+    fun updateMovie(@RequestBody @Valid body: MovieDTO): ResponseEntity<CountDTO>
 
     @ApiOperation(
         value = "Deletes a new movie.",
@@ -78,6 +78,7 @@ interface MovieControllerApi {
         ]
     )
     @RequestMapping(
+        value = ["/{id}"],
         method = [RequestMethod.DELETE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
