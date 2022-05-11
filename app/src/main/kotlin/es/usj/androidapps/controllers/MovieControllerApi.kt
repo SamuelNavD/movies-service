@@ -10,12 +10,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
-<<<<<<< HEAD
-@Api(value = "Existing Building Book Service", description = "Existing Building Book API", tags = ["Movies"])
-=======
 @Api(value = "Existing Building Book Service", description = "Existing Building Book API",
     tags = ["Movies"])
->>>>>>> a3da4aecc4c4f275911ca25e86b25597deb48ffb
 @RequestMapping("movies")
 interface MovieControllerApi {
 
@@ -82,6 +78,7 @@ interface MovieControllerApi {
         ]
     )
     @RequestMapping(
+        path = ["/{id}"],
         method = [RequestMethod.DELETE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )

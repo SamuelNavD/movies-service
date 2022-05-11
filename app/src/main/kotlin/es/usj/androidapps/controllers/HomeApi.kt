@@ -10,13 +10,8 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 
-
-<<<<<<< HEAD
-@Api(value = "Home", description = "Home Api", tags = ["Home"])
-=======
 @Api(value = "Home", description = "Home Api",
     tags = ["Home"])
->>>>>>> a3da4aecc4c4f275911ca25e86b25597deb48ffb
 interface HomeApi {
     @ApiOperation(
         value = "Get a microservice status.",
