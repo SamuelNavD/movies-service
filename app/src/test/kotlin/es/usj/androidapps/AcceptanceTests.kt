@@ -122,6 +122,20 @@ class AcceptanceTests : BaseTest(TestProperties.local()) {
     }
 
     @Test
+    fun `add movie id returns movie with maximum id`() {
+        val items = MOVIE_PATH.GET<MovieDTO>(jsonMapper())
+        val size = items.count()
+        val item = createMovieDTO()
+        val returned = MOVIE_PATH.POST<MovieDTO>(item)
+        assert(returned.id > size)
+        assert(returned.actors.size == item.actors.size)
+        assert(returned.actors.sorted().toString() == item.actors.sorted().toString())
+        assert(returned.genres.size == item.genres.size)
+        assert(returned.genres.sorted().toString() == item.genres.sorted().toString())
+        assert(MOVIE_PATH.GET<MovieDTO>(jsonMapper()).count() > size)
+    }
+
+    @Test
     fun `edit movie returns movie properly`() {
         val item = createMovieDTO()
         val created = MOVIE_PATH.POST<MovieDTO>(item)
@@ -135,6 +149,17 @@ class AcceptanceTests : BaseTest(TestProperties.local()) {
         assert(edited.actors.sorted().toString() == item.actors.sorted().toString())
         assert(edited.genres.size == item.genres.size)
         assert(edited.genres.sorted().toString() == item.genres.sorted().toString())
+    }
+
+    @Test
+    fun `edit movie title returns movie properly`() {
+        val edited = "$MOVIE_PATH/1".GET<MovieDTO>()
+        edited.title = "New guardians"
+        val size = MOVIE_PATH.PUT<CountDTO>(edited)
+        assert(size.count == 1)
+        val created = "$MOVIE_PATH/1".GET<MovieDTO>()
+        assert(edited.id == created.id)
+        assert(edited.title == created.title)
     }
 
 
