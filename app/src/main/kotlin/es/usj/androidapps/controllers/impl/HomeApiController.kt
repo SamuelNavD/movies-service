@@ -18,6 +18,6 @@ class HomeApiController : HomeApi {
     }
 
     override fun version(): ResponseEntity<VersionDTO> {
-        return ResponseEntity.ok().body(VersionDTO("1.0.1"))
+        return ResponseEntity.ok().body(VersionDTO("1.0.2"))
     }
 }

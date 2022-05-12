@@ -40,7 +40,7 @@ interface HomeApi {
     @ApiOperation(
         value = "Get a microservice version.",
         nickname = "version",
-        notes = "Version must be equals to 1.0.1",
+        notes = "Version must be equals to 1.0.2",
         response = VersionDTO::class
     )
     @ApiResponses(
