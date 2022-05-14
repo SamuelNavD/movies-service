@@ -10,21 +10,21 @@ class Movie(
     @Id
     var id: Long,
     @Column(length = 250)
-    val title: String,
+    var title: String,
     @Column(columnDefinition = "TEXT")
-    val description: String,
+    var description: String,
     @Column
-    val director: String,
+    var director: String,
     @Column(name = "release_year")
-    val year: Int,
+    var year: Int,
     @Column
-    val runtime: Int,
+    var runtime: Int,
     @Column
-    val rating: Double,
+    var rating: Double,
     @Column
-    val votes: Long,
+    var votes: Long,
     @Column
-    val revenue: Double,
+    var revenue: Double,
     @ManyToMany(cascade = [CascadeType.ALL])
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
