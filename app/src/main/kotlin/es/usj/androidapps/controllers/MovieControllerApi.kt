@@ -42,11 +42,11 @@ interface MovieControllerApi {
         value = "Updates a new movie.",
         nickname = "updateMovie",
         notes = "Updates a new movie.",
-        response = Int::class
+        response = CountDTO::class
     )
     @ApiResponses(
         value = [
-            ApiResponse(code = 200, message = "OK.", response = Int::class),
+            ApiResponse(code = 200, message = "OK.", response = CountDTO::class),
             ApiResponse(code = 400, message = "Invalid Credentials.", response = Error::class),
             ApiResponse(code = 401, message = "Unauthorized.", response = Error::class),
             ApiResponse(code = 403, message = "Forbidden.", response = Error::class),
