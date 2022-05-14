@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 
 
 @Api(value = "Home", description = "Home Api", tags = ["Home"])
-interface HomeApi {
+interface HomeControllerApi {
     @ApiOperation(
         value = "Get a microservice status.",
         nickname = "healthCheck",
@@ -40,7 +40,7 @@ interface HomeApi {
     @ApiOperation(
         value = "Get a microservice version.",
         nickname = "version",
-        notes = "Version must be equals to 1.0.2",
+        notes = "Version must be equals to 1.0.3",
         response = VersionDTO::class
     )
     @ApiResponses(
