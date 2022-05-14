@@ -11,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.runApplication
+import org.springframework.core.io.ResourceLoader
 import javax.annotation.PostConstruct
 
 @EntityScan(basePackages = ["es.usj.androidapps"])
 @SpringBootApplication
 class MoviesServiceMsApplication {
 
+    @Autowired
+    lateinit var resourceLoader: ResourceLoader
     @Autowired
     lateinit var mservice: MovieRepository
     @Autowired
@@ -32,9 +35,11 @@ class MoviesServiceMsApplication {
         val genres = mutableMapOf<String, Genre>()
         val actors = mutableMapOf<String, Actor>()
         val movies = mutableMapOf<Long, Movie>()
-        val file = System.getProperty("user.dir") + "/app/src/main/resources/data.csv"
+        val resource = resourceLoader.getResource("classpath:/data.csv")
+
+        val inputStream = resource.inputStream
         var count = 0
-        reader.open(file) {
+        reader.open(inputStream) {
             readAllAsSequence(12).forEach { row ->
                 if (count != 0) {
                     val genresInMovie = cleanRow(row[2], "").split(',')
