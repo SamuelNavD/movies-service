@@ -25,7 +25,7 @@ class Movie(
     var votes: Long,
     @Column
     var revenue: Double,
-    @ManyToMany(cascade = [CascadeType.ALL])
+    @ManyToMany(cascade = [CascadeType.DETACH])
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
         name = "actors_to_movies",
@@ -33,7 +33,7 @@ class Movie(
         inverseJoinColumns = [JoinColumn(name = "id_movie")]
     )
     var actors: MutableList<Actor> = mutableListOf(),
-    @ManyToMany(cascade = [CascadeType.ALL])
+    @ManyToMany(cascade = [CascadeType.DETACH])
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
         name = "genres_to_movies",
