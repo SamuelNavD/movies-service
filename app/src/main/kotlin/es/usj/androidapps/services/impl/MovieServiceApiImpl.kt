@@ -34,8 +34,7 @@ class MovieServiceApiImpl : MovieServiceApi {
     }
 
     override fun find(id: Long): MovieDTO? {
-        val movie = movieRepository.findById(id)
-        return if(movie.isEmpty) null else DataConverter.movieToDTO(movie.get())
+        return DataConverter.movieToDTO(movieRepository.findById(id).get())
     }
 
     override fun delete(id: Long): MovieDTO {
