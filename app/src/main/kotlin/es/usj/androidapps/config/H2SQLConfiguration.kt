@@ -1,14 +1,6 @@
 package es.usj.androidapps.config
 
-import es.usj.androidapps.model.Actor
-import es.usj.androidapps.model.Genre
-import es.usj.androidapps.model.Movie
 import org.h2.tools.Server
-import org.hibernate.boot.MetadataSources
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder
-import org.hibernate.cfg.Environment
-import org.hibernate.tool.hbm2ddl.SchemaExport
-import org.hibernate.tool.schema.TargetType
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -18,7 +10,6 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
 import org.springframework.transaction.annotation.EnableTransactionManagement
-import java.io.File
 import java.sql.SQLException
 import java.util.*
 import javax.persistence.ValidationMode
@@ -73,27 +64,5 @@ class H2SQLConfiguration {
         emf.setValidationMode(ValidationMode.AUTO)
         emf.afterPropertiesSet()
         return emf
-    }
-
-    private fun generateCustomSchema() {
-        val settings: MutableMap<String?, String?> = HashMap()
-        settings[Environment.URL] = "jdbc:h2:mem:moviesdb"
-        settings[Environment.USER] = user
-        settings[Environment.PASS] = password
-        val serviceRegistry = StandardServiceRegistryBuilder().applySettings(settings).build()
-        val metadataSources = MetadataSources(serviceRegistry)
-        metadataSources.addAnnotatedClass(Actor::class.java)
-        metadataSources.addAnnotatedClass(Movie::class.java)
-        metadataSources.addAnnotatedClass(Genre::class.java)
-        val metadata: org.hibernate.boot.Metadata = metadataSources.buildMetadata()
-
-        if (File("../create-db.sql").exists()) {
-            File("../create-db.sql").delete()
-        }
-        val schemaExport = SchemaExport()
-        schemaExport.setFormat(true)
-        schemaExport.setDelimiter(";")
-        schemaExport.setOutputFile("../create-db.sql")
-        schemaExport.createOnly(EnumSet.of(TargetType.SCRIPT), metadata)
     }
 }
